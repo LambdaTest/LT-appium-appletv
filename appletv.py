@@ -6,7 +6,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 def getCaps():
     desired_caps = {
         "deviceName" : "Apple TV",
-        "platformVersion" :  "16",
+        "platformVersion" :  "18",
         "platform" : "tvos",
         "isRealMobile":True,
         "build": "Apple TV Testing",
