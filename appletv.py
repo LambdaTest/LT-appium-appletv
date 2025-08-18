@@ -4,19 +4,20 @@ import time
 from appium.webdriver.common.appiumby import AppiumBy
 
 def getCaps():
-    desired_caps = {
+    ltOPtions = {
         "deviceName" : "Apple TV",
-        "platformVersion" :  "16",
+        "platformVersion" :  "18",
         "platform" : "tvos",
-        "isRealMobile":True,
+        "isRealMobile": True,
         "build": "Apple TV Testing",
         "video": True,
         "app":"APP_URL",     #Enter app url here
-        "network": False,
-        "geoLocation": "FR",
+        "network": True,
         "devicelog": True,
         "visual" : True
     }
+    
+    desired_caps = {"lt:options": ltOPtions}
 
     return desired_caps
 
@@ -39,7 +40,7 @@ def runTest():
     desired_cap = getCaps()
     url = "https://"+username+":"+accesskey+"@"+gridUrl
 
-    print("Initiating remote driver on platform: "+desired_cap["deviceName"]+" browser: "+" version: "+desired_cap["platformVersion"])
+    print("Initiating remote driver on platform: "+desired_cap["lt:options"]["deviceName"])
     driver = webdriver.Remote(
         desired_capabilities=desired_cap,
         command_executor= url
@@ -85,7 +86,7 @@ def runTest():
     element = driver.switch_to.active_element
     element.click()
     time.sleep(3)   
-
+    driver.execute_script("lambda-status=passed")
     driver.quit()   
 
 if __name__ == "__main__":
